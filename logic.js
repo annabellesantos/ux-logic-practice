@@ -21,7 +21,7 @@
 */
 function getColor(number) {
   // Uncomment and complete
-  return /* ( Your code Here ) ?  Your code Here  :  Your code Here */;
+  return number > 10 ? "blue" : "red";
 }
 
 /* 
@@ -48,9 +48,18 @@ console.log(getColor(10) === "red");
     otherwise if the brightness is greater than zero but less that 200, return "dimmed"
     if the brightness is greater than or equal to 200, then return "on"
 */
+
 function lightStatus(brightness) {
-  let result = "";
-  // Put your logic here
+  if (brightness == 0) {
+    result = "off";
+  } else if (brightness > 0 && brightness < 200) {
+    result = "dimmed";
+  } else if (brightness >= 200) {
+    result = "on";
+  } else {
+    result = "Try again!";
+  }
+
   return result;
 }
 
@@ -88,14 +97,31 @@ console.log(lightStatus(255) === "on");
 
 function getLightBulbStatusDisplayString(status) {
   let result = "";
-  /* uncomment and complete
-    switch( your code here ) {
-      case "your code here": 
-        your code here;
-        break;
-      etc...
-    }
-    */
+  switch (status) {
+    case "on":
+      result = "The house is bright!";
+      break;
+    case "dimmed":
+      result = "The house is nice and dim";
+      break;
+    case "deleted":
+      result = "The lightbulb has been removed from the system";
+      break;
+    case "off":
+      result = "The house is dark";
+      break;
+    case "broken":
+      result = "The house is dark and we can't turn the light on!";
+      break;
+    case "offline":
+    case "missing": // Fall-through: https://stackoverflow.com/questions/6513585/test-for-multiple-cases-in-a-switch-like-an-or
+      result = "The house is dark and we can't find the lightbulb!";
+      break;
+    default:
+      result = "Something is wrong!";
+      break;
+  }
+
   return result;
 }
 
@@ -228,6 +254,30 @@ function updateLights(
   turnOnLight("livingRoomLight");
   // example of turning off a light
   turnOffLight("livingRoomLight");
+
+  // I should've drawn some sort of diagram before doing this, instead of staring at the logic to figure what to write lol.
+
+  if (itIsDarkOutside) {
+    turnOnLight("frontPorchLight");
+    if (theyWentToBed) {
+      turnOnLight("bedroomLight");
+    } else if (somebodyIsHome) {
+      turnOnLight("livingRoomLight");
+      turnOnLight("diningRoomLight");
+      if (theyAreCooking) {
+        turnOnLight("kitchenLight");
+      } else if (theyAreWatchingTV) {
+        turnOffLight("livingRoomLight");
+        turnOffLight("diningRoomLight");
+      } else {
+        // do we need elses??
+      }
+    } else {
+      // do we need elses??
+    }
+  } else {
+    // do we need elses??
+  }
 }
 
 /* 
